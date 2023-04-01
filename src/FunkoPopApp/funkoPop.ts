@@ -1,12 +1,12 @@
-enum FunkoPopType {
-  "Pop!" = 1,
+export enum FunkoPopType {
+  "Pop!",
   "Pop! Rides",
   "Vynil Soda",
   "Vynil Gold",
   "Pop! Rocks",
 }
 
-enum FunkoPopGenre {
+export enum FunkoPopGenre {
   "Animación",
   "Películas y TV",
   "Videojuegos",
@@ -53,7 +53,7 @@ export class FunkoPop {
   }
 
   get ID(): number {
-    return this.id_;  
+    return this.id_;
   }
 
   set ID(id: number) {
@@ -67,7 +67,68 @@ export class FunkoPop {
   set Name(name: string) {
     this.name_ = name;
   }
-  
 
-  
+  get Description(): string {
+    return this.description_;
+  }
+
+  set Description(description: string) {
+    this.description_ = description;
+  }
+
+  get Type(): FunkoPopType {
+    return this.type_;
+  }
+
+  set Type(type: FunkoPopType) {
+    this.type_ = type;
+  }
+
+  get Genre(): FunkoPopGenre {
+    return this.genre_;
+  }
+
+  set Genre(genre: FunkoPopGenre) {
+    this.genre_ = genre;
+  }
+
+  get Franchise(): string {
+    return this.franchise_;
+  }
+
+  set Franchise(franchise: string) {
+    this.franchise_ = franchise;
+  }
+
+  get Num(): number {
+    return this.num_;
+  }
+
+  set Num(num: number) {
+    this.num_ = num;
+  }
+
+  get Exclusive(): boolean {
+    return this.exclusive_;
+  }
+
+  set Exclusive(exclusive: boolean) {
+    this.exclusive_ = exclusive;
+  }
+
+  get SpecialFeatures(): string {
+    return this.specialFeatures_;
+  }
+
+  set SpecialFeatures(specialFeatures: string) {
+    this.specialFeatures_ = specialFeatures;
+  }
+
+  get MarketValue(): number {
+    return this.marketValue_;
+  }
+
+  set MarketValue(marketValue: number) {
+    this.marketValue_ = marketValue;
+  }
 }
