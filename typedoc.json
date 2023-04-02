@@ -1,6 +1,6 @@
 {
   "entryPoints": [
-    "./src/basicFunctions.ts"
+    "./src/FunkoPopApp/app.ts"
   ],
   "out": "./docs"
 }

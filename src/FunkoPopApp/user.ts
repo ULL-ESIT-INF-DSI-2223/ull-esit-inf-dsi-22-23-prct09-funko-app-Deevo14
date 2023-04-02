@@ -75,7 +75,7 @@ export class User {
   public removeFunko(id: number): boolean {
     if (fs.existsSync(`src/FunkoPopApp/Users/${this.userName}/${id}.json`)) {
       fs.unlinkSync(`src/FunkoPopApp/Users/${this.userName}/${id}.json`);
-      this.collection = this.collection.filter((funko) => funko.ID !== id);
+      this.collection = this.collection.filter((funko) => funko.ID !== id);//
       log(chalk.green("Funko removed from your collection"));
       return true;
     } else {
@@ -98,7 +98,9 @@ export class User {
         `src/FunkoPopApp/Users/${this.userName}/${funko.ID}.json`,
         JSON.stringify(funko)
       );
-
+      
+      this.collection = this.collection.filter((funkoPop) => funkoPop.ID !== funko.ID);
+      this.collection.push(funko);
       log(chalk.green("Funko modified"));
       return true;
     } else {
