@@ -1,8 +1,8 @@
 {
-  "name": "doc-test",
+  "name": "practica9",
   "version": "1.0.0",
   "description": "",
-  "main": "basicFunctions.js",
+  "main": "dist/FunkoPopApp/app.js",
   "type": "module",
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node dist/FunkoPopApp/user.js\"",
