@@ -49,7 +49,7 @@ export class User {
    * If the funko already exists in the user's collection, it doesn't add it
    * else, it adds the funko to the user's collection
    */
-  public addFunko(funko: FunkoPop):boolean {
+  public addFunko(funko: FunkoPop): boolean {
     if (
       fs.existsSync(`src/FunkoPopApp/Users/${this.userName}/${funko.ID}.json`)
     ) {
@@ -72,7 +72,7 @@ export class User {
    * If the funko doesn't exist in the user's collection, it doesn't remove it
    * else, it removes the funko from the user's collection
    */
-  public removeFunko(id: number):boolean {
+  public removeFunko(id: number): boolean {
     if (fs.existsSync(`src/FunkoPopApp/Users/${this.userName}/${id}.json`)) {
       fs.unlinkSync(`src/FunkoPopApp/Users/${this.userName}/${id}.json`);
       this.collection = this.collection.filter((funko) => funko.ID !== id);
@@ -90,7 +90,7 @@ export class User {
    * If the funko doesn't exist in the user's collection, it doesn't update it
    * else, it updates the funko from the user's collection
    */
-  public updateFunko(funko: FunkoPop):boolean {
+  public updateFunko(funko: FunkoPop): boolean {
     if (
       fs.existsSync(`src/FunkoPopApp/Users/${this.userName}/${funko.ID}.json`)
     ) {
@@ -144,7 +144,7 @@ export class User {
    * If the user's collection is empty, it shows a message
    * else, it shows the user's collection
    */
-  public showFunkos():boolean {
+  public showFunkos(): boolean {
     if (this.collection.length === 0) {
       log(chalk.red("Your collection is empty"));
       return false;
@@ -176,7 +176,7 @@ export class User {
    * If the funko doesn't exist in the user's collection, it shows a message
    * else, it shows the funko from the user's collection
    */
-  public showFunko(id: number):boolean {
+  public showFunko(id: number): boolean {
     const funko = this.collection.find((funko) => funko.ID === id);
     if (funko) {
       log(chalk.green(`ID: ${funko.ID}`));
@@ -189,7 +189,9 @@ export class User {
       log(chalk.green(`Exclusive: ${funko.Exclusive}`));
       log(chalk.green(`Special Features: ${funko.SpecialFeatures}`));
       log(
-        chalk.green(`Market Value: ${this.getMarketValueColor(funko.MarketValue)}`)
+        chalk.green(
+          `Market Value: ${this.getMarketValueColor(funko.MarketValue)}`
+        )
       );
       return true;
     } else {
