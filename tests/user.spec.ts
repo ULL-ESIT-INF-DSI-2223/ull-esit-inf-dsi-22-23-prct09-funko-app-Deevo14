@@ -33,7 +33,7 @@ describe('User', () => {
     });
     it('should not remove a funko from the user', () => {
         const user = new User('TestUser1');
-        expect(user.removeFunko(2)).to.be.false;
+        expect(user.removeFunko(6)).to.be.false;
     });
     it('should update a funko from the user', () => {
         const user = new User('TestUser1');
