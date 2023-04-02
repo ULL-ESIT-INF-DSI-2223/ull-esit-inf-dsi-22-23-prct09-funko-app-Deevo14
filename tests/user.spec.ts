@@ -19,7 +19,7 @@ describe('User', () => {
     });
     it('should add a funko to the user', () => {
         const user = new User('TestUser1');
-        const newFunko = new FunkoPop(5, 'Classic Sonic', 'The best Sonic Funko ever', FunkoPopType['Pop!'], FunkoPopGenre.Animación, 'Sonic', 2, false, 'None', 15);
+        const newFunko = new FunkoPop(3, 'Classic Sonic', 'The best Sonic Funko ever', FunkoPopType['Pop!'], FunkoPopGenre.Animación, 'Sonic', 2, false, 'None', 15);
         expect(user.addFunko(newFunko)).to.be.true;
     });
     it('should not add a funko to the user', () => {
@@ -44,7 +44,7 @@ describe('User', () => {
     });
     it('should not update a funko from the user', () => {
         const user = new User('TestUser1');
-        const newFunko = new FunkoPop(3, 'Classic Sonic', 'The best Sonic Funko ever', FunkoPopType['Pop!'], FunkoPopGenre.Animación, 'Sonic', 2, false, 'None', 15);
+        const newFunko = new FunkoPop(5, 'Classic Sonic', 'The best Sonic Funko ever', FunkoPopType['Pop!'], FunkoPopGenre.Animación, 'Sonic', 2, false, 'None', 15);
         expect(user.updateFunko(newFunko)).to.be.false;
     });
     it('should get a funko from the user', () => {
@@ -58,7 +58,7 @@ describe('User', () => {
     });
     it('should not get a funko from the user', () => {
         const user = new User('TestUser1');
-        expect(user.showFunko(3)).to.be.false;
+        expect(user.showFunko(5)).to.be.false;
     });
     it('should get all funkos from the user', () => {
         const user = new User('TestUser1');
