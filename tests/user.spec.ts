@@ -19,7 +19,7 @@ describe('User', () => {
     });
     it('should add a funko to the user', () => {
         const user = new User('TestUser1');
-        const newFunko = new FunkoPop(1, 'Classic Sonic', 'The best Sonic Funko ever', FunkoPopType['Pop!'], FunkoPopGenre.Animación, 'Sonic', 2, false, 'None', 15);
+        const newFunko = new FunkoPop(4, 'Classic Sonic', 'The best Sonic Funko ever', FunkoPopType['Pop!'], FunkoPopGenre.Animación, 'Sonic', 2, false, 'None', 15);
         expect(user.addFunko(newFunko)).to.be.true;
     });
     it('should not add a funko to the user', () => {
