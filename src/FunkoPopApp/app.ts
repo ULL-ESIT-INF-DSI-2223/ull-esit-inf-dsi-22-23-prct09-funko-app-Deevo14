@@ -1,7 +1,7 @@
 import { User } from './user.js';
 import { FunkoPop } from './funkoPop.js';
-import { FunkoPopType } from './funkoPop.js';
-import { FunkoPopGenre } from './funkoPop.js';
+import { FunkoPopType } from './funkoPopType.js';
+import { FunkoPopGenre } from './funkoPopGenre.js';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
@@ -204,4 +204,3 @@ yargs(hideBin(process.argv))
 })
 .help()
 .argv;
-

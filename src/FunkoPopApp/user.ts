@@ -3,9 +3,18 @@ import chalk from "chalk";
 const log = console.log;
 import { FunkoPop } from "./funkoPop.js";
 
+/**
+ * Class representing a user
+ */
 export class User {
   private collection: FunkoPop[] = [];
 
+  /**
+   * Constructor for the User class
+   * @param userName The name of the user
+   * if the user exists, it loads the collection from the file system
+   * if the user doesn't exist, it creates a new folder for the user
+   */
   constructor(private userName: string) {
     if (fs.existsSync(`src/FunkoPopApp/Users/${this.userName}`)) {
       const data = fs.readdirSync(`src/FunkoPopApp/Users/${this.userName}/`);
@@ -34,11 +43,18 @@ export class User {
     }
   }
 
-  public addFunko(funko: FunkoPop) {
+  /**
+   * Adds a funko to the user's collection
+   * @param funko The funko to add to the user's collection
+   * If the funko already exists in the user's collection, it doesn't add it
+   * else, it adds the funko to the user's collection
+   */
+  public addFunko(funko: FunkoPop):boolean {
     if (
       fs.existsSync(`src/FunkoPopApp/Users/${this.userName}/${funko.ID}.json`)
     ) {
       log(chalk.red("Funko already in your collection"));
+      return false;
     } else {
       fs.writeFileSync(
         `src/FunkoPopApp/Users/${this.userName}/${funko.ID}.json`,
@@ -46,20 +62,35 @@ export class User {
       );
       this.collection.push(funko);
       log(chalk.green("Funko added to your collection"));
+      return true;
     }
   }
 
-  public removeFunko(id: number) {
+  /**
+   * Removes a funko from the user's collection
+   * @param id The id of the funko to remove from the user's collection
+   * If the funko doesn't exist in the user's collection, it doesn't remove it
+   * else, it removes the funko from the user's collection
+   */
+  public removeFunko(id: number):boolean {
     if (fs.existsSync(`src/FunkoPopApp/Users/${this.userName}/${id}.json`)) {
       fs.unlinkSync(`src/FunkoPopApp/Users/${this.userName}/${id}.json`);
       this.collection = this.collection.filter((funko) => funko.ID !== id);
       log(chalk.green("Funko removed from your collection"));
+      return true;
     } else {
       log(chalk.red("Funko not in your collection"));
+      return false;
     }
   }
 
-  public updateFunko(funko: FunkoPop) {
+  /**
+   * Updates a funko from the user's collection
+   * @param funko The funko to update from the user's collection
+   * If the funko doesn't exist in the user's collection, it doesn't update it
+   * else, it updates the funko from the user's collection
+   */
+  public updateFunko(funko: FunkoPop):boolean {
     if (
       fs.existsSync(`src/FunkoPopApp/Users/${this.userName}/${funko.ID}.json`)
     ) {
@@ -69,17 +100,24 @@ export class User {
       );
 
       log(chalk.green("Funko modified"));
+      return true;
     } else {
       log(chalk.red("Funko not in your collection"));
+      return false;
     }
   }
 
+  /**
+   * Method to get the market value color
+   * @param marketValue The market value of the funko
+   * @returns The market value color
+   */
   private getMarketValueColor(marketValue: number) {
     const marketValueRanges = [
       { min: 0, max: 10 },
       { min: 11, max: 50 },
       { min: 51, max: 100 },
-      { min: 101, max: Number.MAX_VALUE },
+      { min: 101, max: 1000 },
     ];
 
     const marketValueColors = [
@@ -98,12 +136,18 @@ export class User {
       }
     }
 
-    return chalk.green(marketValue.toString());
+    return chalk.blue(marketValue.toString());
   }
 
-  public showFunkos() {
+  /**
+   * Shows the user's collection
+   * If the user's collection is empty, it shows a message
+   * else, it shows the user's collection
+   */
+  public showFunkos():boolean {
     if (this.collection.length === 0) {
       log(chalk.red("Your collection is empty"));
+      return false;
     } else {
       this.collection.forEach((funko) => {
         log(chalk.green(`ID: ${funko.ID}`));
@@ -122,35 +166,17 @@ export class User {
         );
         log(chalk.green("----------------------------------"));
       });
+      return true;
     }
   }
 
-  public showFunko(id: number) {
-    const marketValueRanges = [
-      { min: 0, max: 10 },
-      { min: 11, max: 50 },
-      { min: 51, max: 100 },
-      { min: 101, max: Number.MAX_VALUE },
-    ];
-
-    const getMarketValueColor = (marketValue: number) => {
-      const rangeIndex = marketValueRanges.findIndex(
-        (range) => marketValue >= range.min && marketValue <= range.max
-      );
-      switch (rangeIndex) {
-        case 0:
-          return chalk.red(marketValue);
-        case 1:
-          return chalk.yellow(marketValue);
-        case 2:
-          return chalk.green(marketValue);
-        case 3:
-          return chalk.blue(marketValue);
-        default:
-          return marketValue;
-      }
-    };
-
+  /**
+   * Shows a funko from the user's collection
+   * @param id The id of the funko to show
+   * If the funko doesn't exist in the user's collection, it shows a message
+   * else, it shows the funko from the user's collection
+   */
+  public showFunko(id: number):boolean {
     const funko = this.collection.find((funko) => funko.ID === id);
     if (funko) {
       log(chalk.green(`ID: ${funko.ID}`));
@@ -163,10 +189,12 @@ export class User {
       log(chalk.green(`Exclusive: ${funko.Exclusive}`));
       log(chalk.green(`Special Features: ${funko.SpecialFeatures}`));
       log(
-        chalk.green(`Market Value: ${getMarketValueColor(funko.MarketValue)}`)
+        chalk.green(`Market Value: ${this.getMarketValueColor(funko.MarketValue)}`)
       );
+      return true;
     } else {
       log(chalk.red("Funko not in your collection"));
+      return false;
     }
   }
 }
